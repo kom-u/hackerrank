@@ -19,8 +19,17 @@ vector<string> split(const string &);
 
 string kangaroo(int x1, int v1, int x2, int v2)
 {
-    if (v1 > v2 && (x2 - x1) % (v1 - v2) == 0)
-        return "YES";
+    if (v1 < v2)
+        return "NO";
+
+    for (int i = 0; i < 10000; i++)
+    {
+        if (x1 == x2)
+            return "YES";
+        x1 += v1;
+        x2 += v2;
+    }
+
     return "NO";
 }
 
