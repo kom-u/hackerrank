@@ -11,9 +11,35 @@ string rtrim(const string &);
  * The function is expected to return a STRING.
  * The function accepts INTEGER year as parameter.
  */
+ 
+bool isLeapYear(int year, bool julianCalendar) {
+    if (julianCalendar) {
+        return (year % 4 == 0);
+    } else {
+        return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
+    }
+}
 
 string dayOfProgrammer(int year) {
+    string date;
 
+    if (year == 1918) {
+        date = "26.09.1918";
+    } else if (year <= 1917) {
+        if (isLeapYear(year, true)) {
+            date = "12.09." + to_string(year);
+        } else {
+            date = "13.09." + to_string(year);
+        }
+    } else {
+        if (isLeapYear(year, false)) {
+            date = "12.09." + to_string(year);
+        } else {
+            date = "13.09." + to_string(year);
+        }
+    }
+
+    return date;
 }
 
 int main()
