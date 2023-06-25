@@ -14,7 +14,27 @@ vector<string> split(const string &);
  */
 
 int migratoryBirds(vector<int> arr) {
+    unordered_map<int, int> frequencyMap;
 
+    for (int i = 0; i < arr.size(); i++)
+        frequencyMap[arr[i]]++;
+
+    int highestFrequency = 0;
+    int lowestType = numeric_limits<int>::max();
+
+    for (const auto& pair : frequencyMap) {
+        int type = pair.first;
+        int frequency = pair.second;
+
+        if (frequency > highestFrequency) {
+            highestFrequency = frequency;
+            lowestType = type;
+        } else if (frequency == highestFrequency) {
+            lowestType = min(lowestType, type);
+        }
+    }
+
+    return lowestType;   
 }
 
 int main()
